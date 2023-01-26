@@ -8,10 +8,10 @@ import { NotFound } from './views/NotFound';
 import { SearchDevice } from './views/SearchDevice';
 import  Header  from './components/Header';
 import { AllProducts } from './views/AllProducts';
-import { OrderSuccess}  from './views/OrderSuccess';
 import { PaymentPage } from "./views/PaymentPage";
 
-import Success from "./components/Success";
+import { Success } from "./components/Success";
+import { SuccessNotCustom } from "./components/SuccessNotCustom";
 import Cancel from "./components/Cancel";
 
 function App() {
@@ -33,10 +33,9 @@ function App() {
         <Route path="*" element={<NotFound />} />
         <Route path="/devices/search" element={<SearchDevice {...searchButtonData}/>} />
         <Route path="/products" element={<AllProducts />} />
-        <Route path="/success" element={<OrderSuccess />} />
         <Route path="/payment" element={<PaymentPage />} />
         <Route path="success" element={<Success />} />
-          <Route path="cancel" element={<Cancel />} />
+        <Route path="cancel" element={<Cancel />} />
         
       </Routes>
     </div>

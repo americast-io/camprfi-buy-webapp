@@ -1,11 +1,15 @@
-import Success from "../components/order-success/order-success.component";
+
+import Success from '../components/order-success/order-success.component';
 
 export const OrderSuccess = () => {
   return (
     <div>
-      <Success></Success>
+
+    
+    <Success></Success>
+    
     </div>
-  );
+  )
 };
 
 export default OrderSuccess;

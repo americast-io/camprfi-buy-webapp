@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Checkout } from "../Checkout";
+import { CheckoutCustomStripe } from "../CheckoutCustomStripe";
 
 import {
   getAllPrices,

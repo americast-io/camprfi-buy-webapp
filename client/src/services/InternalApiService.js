@@ -41,3 +41,27 @@ export const getAllPrices = async () => {
   const res = await http.get('/prices');
   return res.data;
 };
+
+// ----------- ORDER API --------------
+
+// will need ICCid 
+export const getDeviceStatusByIccid = async () => {
+  console.log('calling getDeviceStatusByIccid');
+  const res = await http.get('/orders');
+  return res.data;
+
+};
+
+export const pauseDevice = async () => {
+  console.log('calling pauseDevice');
+  const res = await http.post('/orders/pause');
+  return res.data;
+
+};
+
+export const unPauseDeviceWithOffer = async () => {
+  console.log('calling unPauseDeviceWithOffer');
+  const res = await http.post('/orders/unpause');
+  return res.data;
+
+};

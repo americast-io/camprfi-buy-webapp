@@ -6,6 +6,7 @@ import {
     CardCvcElement,
 } from "@stripe/react-stripe-js";
 import { useState } from "react";
+import {useNavigate} from 'react-router-dom';
 import "./payment-form.css";
 
 const options = {
@@ -20,6 +21,7 @@ const options = {
 };
 
 export const PaymentForm = () => {
+    const navigate = useNavigate();
     const stripe = useStripe();
     const elements = useElements();
     // const amount = useSelector('amount');
@@ -73,7 +75,8 @@ export const PaymentForm = () => {
             alert(paymentResult.error);
         } else {
             if (paymentResult.paymentIntent.status === "succeeded") {
-                alert("Payment Successful");
+                // alert("Payment Successful");
+                // navigate('/success');
 
                 order.paymentInfo = {
                     id: paymentResult.paymentIntent.id,
@@ -87,6 +90,8 @@ export const PaymentForm = () => {
                     },
                     body: JSON.stringify(order),
                 }).then((res) => res.json());
+
+                navigate('/success');
 
             }
         }

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 
 import CardIcon from "../images/credit-card.svg";
+import { MetaData } from './layout/MetaData';
 
 // import "../styles.css";
 
@@ -47,6 +48,8 @@ export const Checkout = (props) => {
 
   return (
     <div className="checkout">
+    <MetaData title={'Choose your plan'}></MetaData>
+
       <p className="checkout-title purple-font">{nickname}</p>
       <p className="checkout-title purple-font">{priceId}</p>
 

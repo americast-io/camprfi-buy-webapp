@@ -2,8 +2,8 @@
 import axios from 'axios';
 
 const http = axios.create({
-  // baseURL: 'http://34.239.108.218/api',
-  baseURL: 'http://localhost:8000/api',
+  baseURL: 'https://api.camprfi.com/api',
+  // baseURL: 'http://localhost:8000/api',
 });
 
 export const getAllDevices = async () => {

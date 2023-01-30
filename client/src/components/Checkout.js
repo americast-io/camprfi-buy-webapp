@@ -51,7 +51,6 @@ export const Checkout = (props) => {
     <MetaData title={'Choose your plan'}></MetaData>
 
       <p className="checkout-title purple-font">{nickname}</p>
-      <p className="checkout-title purple-font">{priceId}</p>
 
       <h1 className="checkout-price purple-font">${price}</h1>
 

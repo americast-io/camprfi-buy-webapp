@@ -1,17 +1,36 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import {
   getDeviceByKeyword,
 } from "../services/InternalApiService";
 
+import { useDispatch, useSelector } from 'react-redux';
+import { getDeviceByNumber } from '../actions/deviceActions';
+
+
+// page where user enters their device number. Also our home page. 
 export const SearchDevice = (props, { history }) => {
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
+
+  const { loading, devices, error, deviceId } = useSelector(state => state.devices)
 
   const [deviceNumber, setDeviceNumber] = useState("");
   const [errors, setErrors] = useState(null);
-  const [devices, setDevices] = useState([]);
+  // const [devices, setDevices] = useState([]);
   const [id, setId] = useState([]);
+
+  useEffect(() => {
+    console.log(deviceId);
+    if(deviceId) {
+      navigate(`/devices/${deviceId}`);
+    }
+
+
+  }, [deviceId]);
+
 
   function validateForm(deviceNumber) {
     if (!deviceNumber.trim()) {
@@ -27,6 +46,7 @@ export const SearchDevice = (props, { history }) => {
 
     console.log("device number:", deviceNumber);
     // if (deviceNumber){
+    // use useNavigate instead of history as it is depreciated 
     //   history.pushState(`/devices/search/${deviceNumber}`)
     // }
     // else{
@@ -42,18 +62,22 @@ export const SearchDevice = (props, { history }) => {
       return;
     }
 
-    getDeviceByKeyword(deviceNumber)
-      .then((data) => {
-        console.log("device number:", deviceNumber);
-        console.log("device data:", data[0]._id);
-        setDevices(data);
-        setId(data);
-        navigate(`/devices/${data[0]._id}`);
-      })
-      .catch((error) => {
-        console.log(error);
-        setErrors(error?.response?.data?.errors);
-      }, []);
+    dispatch(getDeviceByNumber(deviceNumber));
+    
+    // navigate(`/devices/${deviceId}`);
+
+    // getDeviceByKeyword(deviceNumber)
+    //   .then((data) => {
+    //     console.log("device number:", deviceNumber);
+    //     console.log("device data:", data[0]._id);
+    //     setDevices(data);
+    //     setId(data);
+    //     navigate(`/devices/${data[0]._id}`);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //     setErrors(error?.response?.data?.errors);
+    //   }, []);
   };
 
   return (

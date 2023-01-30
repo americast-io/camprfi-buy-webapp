@@ -8,8 +8,12 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { Elements } from '@stripe/react-stripe-js'
 import { stripePromise } from './utils/stripe/stripe.utils';
 
+import { Provider } from 'react-redux';
+import store from './store/store';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  <Provider store={store}>
   <React.StrictMode>
     <BrowserRouter>
         <Elements stripe={stripePromise}>
@@ -17,6 +21,7 @@ root.render(
         </Elements> 
     </BrowserRouter>
   </React.StrictMode>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

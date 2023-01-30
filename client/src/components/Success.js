@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { ReactReduxContext } from 'react-redux'
 import PaymentForm from "../components/payment-form/payment-form.component";
 
 import ProductCard from "../components/product-card/product-card.component";
@@ -21,6 +23,10 @@ const order = {
 export const Success = (props) => {
     const [deviceStatus, setDeviceStatus] = useState('inactive');
     const [error, setError] = useState('');
+
+     // in state.deviceDetails, deviceDetails came from store.js when we created combinedReducer. 
+     const { loading, device } = useSelector(state => state.deviceDetails)
+
 
     // get device status using iccid
     useEffect(() => {
@@ -110,9 +116,7 @@ export const Success = (props) => {
 
     return (
         <div>
-            <h2>Thank you for your purchase from not custom</h2>
-
-            {  error? <p>{error}</p>: <p>Your device status is {deviceStatus} </p>}
+            <h2>Thank you for your purchase!</h2>
 
 
         </div>

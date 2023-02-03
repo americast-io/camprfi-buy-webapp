@@ -3,6 +3,8 @@ import { Fragment } from "react";
 
 import React from "react";
 
+
+// Device search button from the 1st page. 
 export const SearchButton = (props) => {
     const { enterDeviceNumber, searchButton } = props;
 

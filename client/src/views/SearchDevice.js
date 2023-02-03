@@ -1,37 +1,29 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-
-import {
-  getDeviceByKeyword,
-} from "../services/InternalApiService";
+import { useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from 'react-redux';
 import { getDeviceByNumber } from '../actions/deviceActions';
 
 
-// page where user enters their device number. Also our home page. 
-export const SearchDevice = (props, { history }) => {
-  const dispatch = useDispatch();
+// Page where user enters their device number. Also our home page. 
+export const SearchDevice = () => {
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const { loading, devices, error, deviceId } = useSelector(state => state.devices)
-
   const [deviceNumber, setDeviceNumber] = useState("");
   const [errors, setErrors] = useState(null);
-  // const [devices, setDevices] = useState([]);
-  const [id, setId] = useState([]);
+  
 
+  // Need use effect here since after user clicks on the button, it should redirect to the plan page but deviceId is not set yet. This needs to be fixes since now user cannot go back to the search page. 
   useEffect(() => {
-    console.log(deviceId);
     if(deviceId) {
       navigate(`/devices/${deviceId}`);
     }
-
-
   }, [deviceId]);
 
-
+  // Form validation on the front end side.
   function validateForm(deviceNumber) {
     if (!deviceNumber.trim()) {
       return "Device number is required";
@@ -43,19 +35,7 @@ export const SearchDevice = (props, { history }) => {
 
   const handleDeviceSubmit = (event) => {
     event.preventDefault();
-
-    console.log("device number:", deviceNumber);
-    // if (deviceNumber){
-    // use useNavigate instead of history as it is depreciated 
-    //   history.pushState(`/devices/search/${deviceNumber}`)
-    // }
-    // else{
-    //     history.pushState('/')
-
-    //   }
-
     const resultError = validateForm(deviceNumber);
-    console.log(resultError);
 
     if (resultError !== null) {
       setErrors(resultError);
@@ -64,20 +44,6 @@ export const SearchDevice = (props, { history }) => {
 
     dispatch(getDeviceByNumber(deviceNumber));
     
-    // navigate(`/devices/${deviceId}`);
-
-    // getDeviceByKeyword(deviceNumber)
-    //   .then((data) => {
-    //     console.log("device number:", deviceNumber);
-    //     console.log("device data:", data[0]._id);
-    //     setDevices(data);
-    //     setId(data);
-    //     navigate(`/devices/${data[0]._id}`);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //     setErrors(error?.response?.data?.errors);
-    //   }, []);
   };
 
   return (
@@ -99,36 +65,6 @@ export const SearchDevice = (props, { history }) => {
           <button className="btn">Choose a plan!</button>
         </form>
       </div>
-
-      {devices.map((device) => {
-        const { _id, name } = device;
-
-        return (
-          <div key={_id} className="shadow mb-4 rounded border p-4">
-            <table>
-              <tr>
-                <th>Device</th>
-                <th>Actions</th>
-              </tr>
-
-              <tr>
-                <td>
-                  <Link to={`/devices/${_id}`}>
-                    <h4>{name}</h4>
-                  </Link>
-                </td>
-                <td>
-                  <div className="mt-2">
-                    <Link to={`/products`}>
-                      <h4>Purchase</h4>
-                    </Link>
-                  </div>
-                </td>
-              </tr>
-            </table>
-          </div>
-        );
-      })}
     </div>
   );
 };

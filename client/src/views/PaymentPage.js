@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import PaymentForm from "../components/payment-form/payment-form.component";
 
-
 import { getAllProducts } from "../services/InternalApiService";
 
+// This is the page with payment form. 3rd page in the application. 
 export const PaymentPage = (props) => {
     const [products, setProducts] = useState([]);
 

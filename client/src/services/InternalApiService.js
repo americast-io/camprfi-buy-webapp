@@ -2,8 +2,8 @@
 import axios from 'axios';
 
 const http = axios.create({
-  // baseURL: 'https://api.camprfi.com/api',
-  baseURL: 'http://localhost:8000/api',
+  baseURL: 'https://api.camprfi.com/api',
+  // baseURL: 'http://localhost:8000/api',
 });
 
 export const getAllDevices = async () => {
@@ -39,8 +39,8 @@ export const getAllPrices = async () => {
 
 // ----------- ORDER API --------------
 
-export const createOrder = async (data) => {
-  const res = await http.post('/orders', data);
+export const createOrder = async (data, config) => {
+  const res = await http.post('/orders', data, config);
   return res.data;
 }
 

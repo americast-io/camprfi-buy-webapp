@@ -46,7 +46,8 @@ export const DataPlansForm = (props) => {
 
   return (
     <div>
-      <div className="plan-div">
+    <div className="p-4">
+      <div className="plan-div ">
         <h4 className="purple-font-underlined">PLAN</h4>
       </div>
 
@@ -91,6 +92,7 @@ export const DataPlansForm = (props) => {
           <option value="3">3 Days</option>
           <option value="7">1 Week</option>
         </select>
+      </div>
       </div>
 
       <div className="products-container">

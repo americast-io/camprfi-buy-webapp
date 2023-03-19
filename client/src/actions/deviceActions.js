@@ -16,12 +16,9 @@ import {
 
 export const getDeviceByNumber = (deviceNumber) => async (dispatch) => {
     try{
-        console.log("in get device dispatch")
         dispatch({ type: FIND_DEVICE_REQUEST })
 
         const data = await getDeviceByKeyword(deviceNumber)
-
-        console.log('dispatch data', data)
 
         dispatch({
             type: FIND_DEVICE_SUCCESS,
@@ -47,12 +44,10 @@ export const clearErrors = () => async (dispatch) => {
 
 export const getDeviceDetails = (id) => async (dispatch) => {
     try{
-        console.log("in get device details dispatch")
+        
         dispatch({ type: DEVICE_DETAILS_REQUEST })
 
         const data = await getDeviceById(id)
-
-        console.log('dispatch data', data)
 
         dispatch({
             type: DEVICE_DETAILS_SUCCESS,

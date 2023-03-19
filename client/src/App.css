@@ -5,8 +5,7 @@
 }
 
 .products-container{
-  display: flex;
-  justify-content: center;
+  text-align: center;
   margin: 15px;
   
 }
@@ -121,6 +120,8 @@ code {
 .plan-div {
   margin-bottom: 30px;
 }
+
+
 
 
 

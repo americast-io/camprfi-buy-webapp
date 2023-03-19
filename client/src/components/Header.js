@@ -6,8 +6,8 @@ const Header = () => {
   return (
     <Fragment>
 
-      <nav className=" navbar navbar-expand-lg navbar-light bg-light sticky-top justify-content-center mb-4">
-        <h1 className="navbar-brand mb-0">Welcome to Camprfi</h1>
+      <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top justify-content-center mb-4">
+        <h1 className="welcome navbar-brand mb-0">Welcome to Camprfi</h1>
         <div className="navbar-nav justify-content-between">
         </div>
       </nav>

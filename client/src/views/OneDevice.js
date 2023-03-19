@@ -6,12 +6,14 @@ import { DeviceInfo } from "../components/device-info/device-info.component";
 export const OneDevice = () => {
 
   return (
-    <div>
+    <div className="col-lg-6 p-4 rounded mx-auto shadow">
       <DeviceInfo></DeviceInfo>
-      <div className="w-50 p-4 rounded mx-auto shadow">
+      <div className="">
+      
         <DataPlansForm></DataPlansForm>
+        </div>
       </div>
-    </div>
+  
   );
 };
 

@@ -5,14 +5,12 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
 import { deviceReducer, deviceDetailsReducer } from '../reducers/deviceReducer';
+import { newOrderReducer } from "../reducers/orderReducers"
 
 const reducer = combineReducers({
     devices: deviceReducer,
-    deviceDetails: deviceDetailsReducer
-
-
-
-
+    deviceDetails: deviceDetailsReducer,
+    newOrder: newOrderReducer,
 })
 
 const persistConfig = {

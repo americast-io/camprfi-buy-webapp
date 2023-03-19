@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ReactReduxContext } from 'react-redux'
 import PaymentForm from "../payment-form/payment-form.component";
+import MetaData from '../layout/MetaData'
+import SuccessIcon from "../../images/order_success.png";
 
 import {
     getDeviceStatusByIccid,
@@ -29,7 +31,7 @@ export const Success = (props) => {
 
     // get device status using iccid
     useEffect(() => {
-        console.log("in use effect");
+        // console.log("in use effect");
         console.log(device)
 
         // async function fetchData() {
@@ -115,11 +117,21 @@ export const Success = (props) => {
 
 
     return (
-        <div>
-            <h2>Thank you for your purchase custom!</h2>
+        <Fragment>
 
+            <MetaData title={'Order Success'} />
 
-        </div>
+            <div className="row justify-content-center">
+                <div className="col-6 mt-5 text-center">
+                    <img className="my-5 img-fluid d-block mx-auto" src={SuccessIcon} alt="Order Success" width="200" height="200" />
+
+                    <h2>Your Order has been placed successfully.</h2>
+
+                </div>
+
+            </div>
+
+        </Fragment>
     );
 };
 

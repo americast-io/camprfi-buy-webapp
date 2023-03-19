@@ -8,7 +8,6 @@ import { NotFound } from './views/NotFound';
 import { SearchDevice } from './views/SearchDevice';
 import  Header  from './components/layout/Header';
 import { PaymentPage } from "./views/PaymentPage";
-
 import { OrderSuccess } from "./views/OrderSuccess";
 import { OrderCancel } from "./views/OrderCancel";
 

@@ -14,12 +14,23 @@ export const SearchDevice = () => {
   const { loading, devices, error, deviceId } = useSelector(state => state.devices)
   const [deviceNumber, setDeviceNumber] = useState("");
   const [errors, setErrors] = useState(null);
+  const goToDevice = () => {
+    navigate({
+      pathname: '/devices',
+      search: `?keyword=${deviceNumber}`,
+    })};
   
 
   // Need use effect here since after user clicks on the button, it should redirect to the plan page but deviceId is not set yet. This needs to be fixes since now user cannot go back to the search page. 
   useEffect(() => {
     if(deviceId) {
-      navigate(`/devices/${deviceId}`);
+      // navigate(`/devices/${deviceId}`);
+      // navigate(`/devices?keyword=${deviceNumber}`);
+      // const goToDevice = () => {
+      // navigate({
+      //   pathname: '/devices',
+      //   search: `?keyword=${deviceNumber}`,
+      // })};
     }
   }, [deviceId]);
 
@@ -42,14 +53,19 @@ export const SearchDevice = () => {
       return;
     }
 
-    dispatch(getDeviceByNumber(deviceNumber));
+    navigate({
+      pathname: '/devices',
+      search: `?keyword=${deviceNumber}`,
+    });
+
+    // dispatch(getDeviceByNumber(deviceNumber));
     
   };
 
   return (
     <div className="search-device-container">
       <div className="w-50 p-4 rounded mx-auto shadow">
-        <form onSubmit={(e) => handleDeviceSubmit(e)}>
+        <form onSubmit={(e) => {handleDeviceSubmit(e)}}>
           <div className="form-group">
             <label className="h3">Enter Device Number:</label>
             {errors && <span style={{ color: "red" }}> {errors}</span>}

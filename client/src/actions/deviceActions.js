@@ -42,12 +42,12 @@ export const clearErrors = () => async (dispatch) => {
 }
 
 
-export const getDeviceDetails = (id) => async (dispatch) => {
+export const getDeviceDetails = (deviceNumber) => async (dispatch) => {
     try{
-        
-        dispatch({ type: DEVICE_DETAILS_REQUEST })
 
-        const data = await getDeviceById(id)
+        dispatch({ type: DEVICE_DETAILS_REQUEST })
+        // const data = await getDeviceById(id)
+        const data = await getDeviceByKeyword(deviceNumber)
 
         dispatch({
             type: DEVICE_DETAILS_SUCCESS,

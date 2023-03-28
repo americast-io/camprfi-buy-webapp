@@ -26,7 +26,7 @@ function App() {
       <Routes>
         {/* Redirect example */}
         <Route path="/" element={<Navigate to="/devices/search" replace />} />
-        <Route path="/devices/:id" element={<OneDevice />} />
+        <Route path="/devices" element={<OneDevice />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/devices/search" element={<SearchDevice {...searchButtonData}/>} />
         <Route path="/payment" element={<PaymentPage />} />

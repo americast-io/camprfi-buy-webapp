@@ -19,10 +19,11 @@ export const createOrderAction = (order) => async (dispatch, getState) => {
             }
         }
 
-        const data =  createOrder(order, config)
+        const data =  await createOrder(order, config)
+
 
         dispatch({
-            CREATE_ORDER_SUCCESS,
+            type: CREATE_ORDER_SUCCESS,
             payload: data
         })
 

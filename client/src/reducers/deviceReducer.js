@@ -20,6 +20,7 @@ export const deviceReducer = (state = { devices: [] }, action) => {
             return {
                 loading: false,
                 devices: action.payload,
+                device: action.payload[0],
                 deviceId: action.payload[0]._id,
                 deviceNumber: action.payload[0].deviceNumber
             }

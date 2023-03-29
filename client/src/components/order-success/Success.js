@@ -32,7 +32,7 @@ export const Success = (props) => {
     // get device status using iccid
     useEffect(() => {
         // console.log("in use effect");
-        console.log(device)
+        // console.log(device)
 
         // async function fetchData() {
 

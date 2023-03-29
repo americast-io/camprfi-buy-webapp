@@ -23,7 +23,6 @@ export const CheckoutCustomStripe = (props) => {
         setShowPayment(!showPayment)
         const element = document.getElementById('section-1');
         if (element) {
-          console.log("in element if")
           element.scrollIntoView({ block: 'end' });
         }
       }

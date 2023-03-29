@@ -48,13 +48,11 @@ export const PaymentForm = ({price}) => {
     const [lastNameErrors, setLastNameErrors] = useState(null);
     const [emailErrors, setEmailErrors] = useState(null);
      // in state.deviceDetails, deviceDetails came from store.js when we created combinedReducer. 
-     const { loading, device } = useSelector(state => state.deviceDetails)
+     const { loading, device } = useSelector(state => state.devices)
      const { error } = useSelector(state => state.newOrder)
     const order = {
         device,
     };
-
-    console.log(device)
 
     useEffect(() => {
         const element = document.getElementById('section-1');
@@ -63,7 +61,6 @@ export const PaymentForm = ({price}) => {
      });
     }
 
-    console.log(device)
 
     }, []);
 
@@ -134,7 +131,6 @@ export const PaymentForm = ({price}) => {
                 order.firstName = userFirstName;
                 order.lastName = userLastName;
                 order.email = userEmail;
-
                 // const response2 = await createOrder(order);
                 dispatch(createOrderAction(order))
 

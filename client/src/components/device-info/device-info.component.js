@@ -4,6 +4,8 @@ import "./device-info.css";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
+import { useNavigate } from "react-router-dom";
+
 import { useDispatch, useSelector } from "react-redux";
 
 import { getDeviceDetails } from "../../actions/deviceActions";
@@ -14,6 +16,8 @@ import { getDeviceByNumber } from '../../actions/deviceActions';
 
 // component to display device details. Used on the second page. 
 export const DeviceInfo = () => {
+
+    const navigate = useNavigate();
 
     // in state.deviceDetails, deviceDetails came from store.js when we created combinedReducer. 
     const { loading, error, devices, deviceId, deviceNumber } = useSelector(state => state.devices)
@@ -33,9 +37,9 @@ export const DeviceInfo = () => {
 
     }, [dispatch, keyword]);
 
-    if (deviceId === null) {
+    if (deviceId === undefined) {
         // display nothing until we have data.
-        return null;
+        return <h4 style={{color: 'red'}}>We could not find your device</h4>;
       }
 
     return (

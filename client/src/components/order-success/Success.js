@@ -26,7 +26,8 @@ export const Success = (props) => {
     
 
      // in state.deviceDetails, deviceDetails came from store.js when we created combinedReducer. 
-     const { loading, device } = useSelector(state => state.deviceDetails)
+     const { loading, devices } = useSelector(state => state.devices)
+     console.log(devices)
 
 
     // get device status using iccid
@@ -35,6 +36,9 @@ export const Success = (props) => {
         // console.log(device)
 
         // async function fetchData() {
+
+        // move the fetch device status to the device details page and save the status in the redux store,
+        // then check status here and call appropriate api pause/unpause or just unpause
 
         //     try {
 
@@ -129,6 +133,11 @@ export const Success = (props) => {
 
                 </div>
 
+            </div>
+            <div className=" p-4 rounded mx-auto shadow">
+                <h1>WiFi Name is {devices[0].wifiName}</h1>
+                <h1>WiFi Password is {devices[0].wifiPassword}</h1>
+            
             </div>
 
         </Fragment>

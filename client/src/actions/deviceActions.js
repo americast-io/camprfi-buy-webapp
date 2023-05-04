@@ -25,10 +25,11 @@ export const getDeviceByNumber = (deviceNumber) => async (dispatch) => {
             payload: data
         })
 
+
     }catch(error) {
         dispatch({
             type: FIND_DEVICE_FAIL,
-            payload: error.response.data.message
+            payload: error
         })
     }
 }

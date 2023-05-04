@@ -2,8 +2,8 @@
 import axios from 'axios';
 
 const http = axios.create({
-  baseURL: 'https://api.camprfi.com/api/v1',
-  // baseURL: 'http://localhost:8000/api/v1',
+  // baseURL: 'https://api.camprfi.com/api/v1',
+  baseURL: 'http://localhost:8000/api/v1',
 });
 
 export const getAllDevices = async () => {
@@ -57,8 +57,14 @@ export const pauseDevice = async () => {
 
 };
 
-export const unPauseDeviceWithOffer = async () => {
-  const res = await http.post('/orders/unpause');
+export const unPauseDeviceWithOffer = async (data) => {
+  const res = await http.post('/orders/unpause', data);
+  return res.data;
+
+};
+
+export const processOrder = async () => {
+  const res = await http.post('/orders/process');
   return res.data;
 
 };

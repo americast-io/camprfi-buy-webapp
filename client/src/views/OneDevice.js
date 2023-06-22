@@ -8,12 +8,10 @@ export const OneDevice = () => {
   return (
     <div className="col-lg-6 p-4 rounded mx-auto shadow">
       <DeviceInfo></DeviceInfo>
-      <div className="">
-      
+      <div>
         <DataPlansForm></DataPlansForm>
-        </div>
       </div>
-  
+    </div>
   );
 };
 

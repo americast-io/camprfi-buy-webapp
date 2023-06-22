@@ -21,9 +21,9 @@ export const DataPlansForm = (props) => {
     getAllPrices()
       .then((data) => {
         setPrices(data.data);
-        const filteredPrices = data.data.filter((price) =>
-          price.nickname.includes(`${amountOfData}Gb for ${planDuration} Day`)
-        );
+        const filteredPrices = data.data.filter((price) => price.nickname && price.nickname.includes(`${amountOfData}Gb / Day for ${planDuration} Days`)
+          
+      );
         setNickname(filteredPrices[0].nickname);
         setFilteredPrice(parseInt(filteredPrices[0].unit_amount) / 100);
         setPriceId(filteredPrices[0].id);
@@ -36,7 +36,7 @@ export const DataPlansForm = (props) => {
 
   const handleDataPlansSubmit = (event) => {
     const filteredPrices = prices.filter((price) =>
-      price.nickname.includes(`${amountOfData}Gb for ${planDuration} Day`)
+    price.nickname && price.nickname.includes(`${amountOfData}Gb / Day for ${planDuration} Days`)
     );
     setNickname(filteredPrices[0].nickname);
     setFilteredPrice(filteredPrice);

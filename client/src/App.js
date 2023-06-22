@@ -7,7 +7,6 @@ import { OneDevice} from './views/OneDevice';
 import { NotFound } from './views/NotFound';
 import { SearchDevice } from './views/SearchDevice';
 import  Header  from './components/layout/Header';
-import { PaymentPage } from "./views/PaymentPage";
 import { OrderSuccess } from "./views/OrderSuccess";
 import { OrderCancel } from "./views/OrderCancel";
 
@@ -29,7 +28,6 @@ function App() {
         <Route path="/devices" element={<OneDevice />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/devices/search" element={<SearchDevice {...searchButtonData}/>} />
-        <Route path="/payment" element={<PaymentPage />} />
         <Route path="success" element={<OrderSuccess />} />
         <Route path="cancel" element={<OrderCancel />} />
         

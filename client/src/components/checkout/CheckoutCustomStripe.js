@@ -7,7 +7,7 @@ import { PaymentForm } from '../../components/payment-form/payment-form.componen
 import CardIcon from "../../images/credit-card.svg";
 import './checkout.css';
 
-// Checkout component that displays plan name, price (from props) and has a buy button which redirects to the Stripe payment form. 
+// Checkout component that displays plan name, price (from props) and has a buy button which displays the Stripe payment form. 
 export const CheckoutCustomStripe = (props) => {
     const [components, setComponents] = useState([]); 
     const { nickname, price, priceId } = props;
@@ -50,10 +50,7 @@ export const CheckoutCustomStripe = (props) => {
             <p className="checkout-title purple-font">{nickname}</p>
             <h1 className="checkout-price purple-font">${price}</h1>
             <div id="section-1">{content}</div>
-             
         </div>
-
-
         </Fragment>
     );
 };

@@ -11,14 +11,14 @@ import {
     unPauseDeviceWithOffer,
 } from "../../services/InternalApiService";
 
-const order = {
+// const order = {
 
-    productId: "57348757345",
-    firstName: "Front",
-    lastName: "End 2",
-    email: "fromfrontend",
-    // device,
-};
+//     productId: "57348757345",
+//     firstName: "Front",
+//     lastName: "End 2",
+//     email: "fromfrontend",
+//     // device,
+// };
 
 export const Success = (props) => {
     const [deviceStatus, setDeviceStatus] = useState('inactive');

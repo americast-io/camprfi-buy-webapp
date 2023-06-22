@@ -33,7 +33,7 @@ const options = {
     },
 };
 
-// stripe payment form. 3rd page.
+// Stripe payment form. Sends payment to Stripe and creates order.
 export const PaymentForm = ({price}) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();

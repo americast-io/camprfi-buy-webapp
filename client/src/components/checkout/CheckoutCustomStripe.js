@@ -48,7 +48,7 @@ export const CheckoutCustomStripe = (props) => {
         <Fragment>
         <div className="checkout">
             <p className="checkout-title purple-font">{nickname}</p>
-            <h1 className="checkout-price purple-font">${price}</h1>
+            <h1 className="checkout-price purple-font">{price.toLocaleString("en-us", {style:"currency", currency:"USD"})}</h1>
             <div id="section-1">{content}</div>
         </div>
         </Fragment>

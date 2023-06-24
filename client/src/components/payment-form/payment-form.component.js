@@ -104,7 +104,7 @@ export const PaymentForm = ({price}) => {
 
         setIsProcessingPayment(true);
 
-        const response = await createStripePaymentIntent({ amount: amount });
+        const response = await createStripePaymentIntent({ amount: amount, description: device });
         const { client_secret } = response;
         const paymentResult = await stripe.confirmCardPayment(client_secret, {
             payment_method: {
@@ -242,7 +242,7 @@ export const PaymentForm = ({price}) => {
                                             type="submit"
                                             className="payment  btn btn-block py-3 btn-primary mb-3"
                                         >
-                                            <span className="ps-3">Pay - {price}</span>
+                                            <span className="ps-3">Pay - {price.toLocaleString("en-us", {style:"currency", currency:"USD"})}</span>
                                             <span className="fas fa-arrow-right"></span>
                                         </button>
                                     </div>

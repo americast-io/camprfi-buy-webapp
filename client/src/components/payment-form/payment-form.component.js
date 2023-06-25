@@ -8,11 +8,9 @@ import {
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { 
-    createStripePaymentIntent
- } from "../../services/InternalApiService";
+import { createStripePaymentIntent } from "../../services/InternalApiService";
 import "./payment-form.css";
-import {createOrderAction, clearErrors} from "../../actions/orderActions"
+import { createOrderAction, clearErrors } from "../../actions/orderActions";
 
 const options = {
     showIcon: true,
@@ -34,12 +32,12 @@ const options = {
 };
 
 // Stripe payment form. Sends payment to Stripe and creates order.
-export const PaymentForm = ({price}) => {
+export const PaymentForm = ({ price, nickname }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const stripe = useStripe();
     const elements = useElements();
-    const amount = price*100;
+    const amount = price * 100;
     const [userFirstName, setUserFirstName] = useState("");
     const [userLastName, setUserLastName] = useState("");
     const [userEmail, setUserEmail] = useState("");
@@ -47,56 +45,65 @@ export const PaymentForm = ({price}) => {
     const [firstNameError, setFirstNameErrors] = useState(null);
     const [lastNameErrors, setLastNameErrors] = useState(null);
     const [emailErrors, setEmailErrors] = useState(null);
-     // in state.deviceDetails, deviceDetails came from store.js when we created combinedReducer. 
-     const { loading, device } = useSelector(state => state.devices)
-     const { error } = useSelector(state => state.newOrder)
+    // in state.deviceDetails, deviceDetails came from store.js when we created combinedReducer.
+    const { loading, device } = useSelector((state) => state.devices);
+    const { error } = useSelector((state) => state.newOrder);
     const order = {
         device,
     };
 
     useEffect(() => {
-        const element = document.getElementById('section-1');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'end'
-     });
-    }
-
-
+        const element = document.getElementById("section-1");
+        if (element) {
+            element.scrollIntoView({ behavior: "smooth", block: "end" });
+        }
     }, []);
 
     // Form validation on the front end side.
-  function validateForm(element, message1, message2) {
-    if (!element.trim()) {
-      return message1;
-    } else if (element.length < 2) {
-      return message2;
+    function validateForm(element, message1, message2) {
+        if (!element.trim()) {
+            return message1;
+        } else if (element.length < 2) {
+            return message2;
+        }
+        return null;
     }
-    return null;
-  }
 
     const paymentHandler = async (e) => {
         e.preventDefault();
 
-        const resultError = validateForm(userFirstName, "First Name is Required", "First Name must be 2 characters or more");
+        const resultError = validateForm(
+            userFirstName,
+            "First Name is Required",
+            "First Name must be 2 characters or more"
+        );
 
-    if (resultError !== null) {
-      setFirstNameErrors(resultError);
-      return;
-    }
+        if (resultError !== null) {
+            setFirstNameErrors(resultError);
+            return;
+        }
 
-    const resultError2 = validateForm(userLastName, "Last Name is Required", "Last Name must be 2 characters or more");
+        const resultError2 = validateForm(
+            userLastName,
+            "Last Name is Required",
+            "Last Name must be 2 characters or more"
+        );
 
-    if (resultError2 !== null) {
-      setLastNameErrors(resultError2);
-      return;
-    }
+        if (resultError2 !== null) {
+            setLastNameErrors(resultError2);
+            return;
+        }
 
-    const resultError3 = validateForm(userEmail, "Email is Required", "Email must be 2 characters or more");
+        const resultError3 = validateForm(
+            userEmail,
+            "Email is Required",
+            "Email must be 2 characters or more"
+        );
 
-    if (resultError3 !== null) {
-      setEmailErrors(resultError3);
-      return;
-    }
+        if (resultError3 !== null) {
+            setEmailErrors(resultError3);
+            return;
+        }
 
         if (!stripe || !elements) {
             return;
@@ -104,13 +111,16 @@ export const PaymentForm = ({price}) => {
 
         setIsProcessingPayment(true);
 
-        const response = await createStripePaymentIntent({ amount: amount, description: device });
+        const response = await createStripePaymentIntent({
+            amount: amount,
+            description: `device id: ${device}, plan: ${nickname}`,
+        });
         const { client_secret } = response;
         const paymentResult = await stripe.confirmCardPayment(client_secret, {
             payment_method: {
                 card: elements.getElement(CardNumberElement),
                 billing_details: {
-                    name: `${userFirstName} ${userLastName}`
+                    name: `${userFirstName} ${userLastName}`,
                 },
             },
         });
@@ -121,8 +131,6 @@ export const PaymentForm = ({price}) => {
             alert(paymentResult.error);
         } else {
             if (paymentResult.paymentIntent.status === "succeeded") {
-                
-
                 order.paymentInfo = {
                     id: paymentResult.paymentIntent.id,
                     status: paymentResult.paymentIntent.status,
@@ -132,7 +140,7 @@ export const PaymentForm = ({price}) => {
                 order.lastName = userLastName;
                 order.email = userEmail;
                 // const response2 = await createOrder(order);
-                dispatch(createOrderAction(order))
+                dispatch(createOrderAction(order));
 
                 navigate("/success");
             }
@@ -144,14 +152,16 @@ export const PaymentForm = ({price}) => {
             <div className="">
                 <div className="mx-auto col-12 col-lg-11">
                     <div id="section-2" className="container p-0">
-                        <div  className="card px-4">
+                        <div className="card px-4">
                             <form onSubmit={paymentHandler}>
                                 <p className="h8 py-3">Payment Details</p>
                                 <div className="row gx-3">
                                     <div className="col-6">
                                         <div className="d-flex flex-column">
                                             <label className="text mb-1">First Name</label>
-                                            {firstNameError && <span style={{ color: "red" }}> {firstNameError}</span>}
+                                            {firstNameError && (
+                                                <span style={{ color: "red" }}> {firstNameError}</span>
+                                            )}
                                             <input
                                                 onChange={(event) => {
                                                     setUserFirstName(event.target.value);
@@ -163,23 +173,27 @@ export const PaymentForm = ({price}) => {
                                         </div>
                                     </div>
                                     <div className="col-6">
-                                    <div className="d-flex flex-column">
-                                        <label className="text mb-1">Last Name</label>
-                                        {lastNameErrors && <span style={{ color: "red" }}> {lastNameErrors}</span>}
-                                        <input
-                                            onChange={(event) => {
-                                                setUserLastName(event.target.value);
-                                            }}
-                                            className="form-control mb-3"
-                                            type="text"
-                                            placeholder="Enter your last name"
-                                        />
+                                        <div className="d-flex flex-column">
+                                            <label className="text mb-1">Last Name</label>
+                                            {lastNameErrors && (
+                                                <span style={{ color: "red" }}> {lastNameErrors}</span>
+                                            )}
+                                            <input
+                                                onChange={(event) => {
+                                                    setUserLastName(event.target.value);
+                                                }}
+                                                className="form-control mb-3"
+                                                type="text"
+                                                placeholder="Enter your last name"
+                                            />
+                                        </div>
                                     </div>
-                                </div>
                                     <div className="col-12">
                                         <div className="d-flex flex-column">
                                             <label className="text mb-1">Email</label>
-                                            {emailErrors && <span style={{ color: "red" }}> {emailErrors}</span>}
+                                            {emailErrors && (
+                                                <span style={{ color: "red" }}> {emailErrors}</span>
+                                            )}
                                             <input
                                                 onChange={(event) => {
                                                     setUserEmail(event.target.value);
@@ -242,7 +256,13 @@ export const PaymentForm = ({price}) => {
                                             type="submit"
                                             className="payment  btn btn-block py-3 btn-primary mb-3"
                                         >
-                                            <span className="ps-3">Pay - {price.toLocaleString("en-us", {style:"currency", currency:"USD"})}</span>
+                                            <span className="ps-3">
+                                                Pay -{" "}
+                                                {price.toLocaleString("en-us", {
+                                                    style: "currency",
+                                                    currency: "USD",
+                                                })}
+                                            </span>
                                             <span className="fas fa-arrow-right"></span>
                                         </button>
                                     </div>

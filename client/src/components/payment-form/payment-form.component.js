@@ -113,7 +113,7 @@ export const PaymentForm = ({ price, nickname }) => {
 
         const response = await createStripePaymentIntent({
             amount: amount,
-            description: `device id: ${device}, plan: ${nickname}`,
+            description: `device id: ${device.deviceNumber}, plan: ${nickname}`,
         });
         const { client_secret } = response;
         const paymentResult = await stripe.confirmCardPayment(client_secret, {

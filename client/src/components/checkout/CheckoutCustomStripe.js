@@ -41,7 +41,7 @@ export const CheckoutCustomStripe = (props) => {
           </div>
       </button>;
       if(showPayment) {
-        content = <PaymentForm price={price} nickname={nickname}/>
+        content = <PaymentForm price={price} nickname={nickname} priceId={priceId}/>
       }
 
     return (

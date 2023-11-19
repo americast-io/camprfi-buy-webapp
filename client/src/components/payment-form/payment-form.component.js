@@ -8,7 +8,7 @@ import {
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { createStripePaymentIntent } from "../../services/InternalApiService";
+import { createStripePaymentIntent, unPauseDeviceWithOffer } from "../../services/InternalApiService";
 import "./payment-form.css";
 import { createOrderAction, clearErrors } from "../../actions/orderActions";
 
@@ -32,7 +32,7 @@ const options = {
 };
 
 // Stripe payment form. Sends payment to Stripe and creates order.
-export const PaymentForm = ({ price, nickname }) => {
+export const PaymentForm = ({ price, nickname, priceId }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const stripe = useStripe();
@@ -47,10 +47,13 @@ export const PaymentForm = ({ price, nickname }) => {
     const [emailErrors, setEmailErrors] = useState(null);
     // in state.deviceDetails, deviceDetails came from store.js when we created combinedReducer.
     const { loading, device } = useSelector((state) => state.devices);
-    const { error } = useSelector((state) => state.newOrder);
+    const { error } = useSelector((state) => state.order);
     const order = {
         device,
     };
+
+    // console.log('nickname', nickname)
+    // console.log('priceId', priceId)
 
     useEffect(() => {
         const element = document.getElementById("section-1");
@@ -134,6 +137,7 @@ export const PaymentForm = ({ price, nickname }) => {
                 order.paymentInfo = {
                     id: paymentResult.paymentIntent.id,
                     status: paymentResult.paymentIntent.status,
+                    priceId: priceId,
                 };
 
                 order.firstName = userFirstName;
@@ -141,6 +145,17 @@ export const PaymentForm = ({ price, nickname }) => {
                 order.email = userEmail;
                 // const response2 = await createOrder(order);
                 dispatch(createOrderAction(order));
+
+                console.log("iccid", device.iccid);
+                console.log("priceId", order.paymentInfo.priceId);
+
+                const data = {
+                    "priceId": order.paymentInfo.priceId,
+                    "iccid": device.iccid,
+                }
+                const deviceUnpauseInfo = await unPauseDeviceWithOffer(data);
+
+
 
                 navigate("/success");
             }

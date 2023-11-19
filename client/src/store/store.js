@@ -10,7 +10,7 @@ import { newOrderReducer } from "../reducers/orderReducers"
 const reducer = combineReducers({
     devices: deviceReducer,
     deviceDetails: deviceDetailsReducer,
-    newOrder: newOrderReducer,
+    order: newOrderReducer,
 })
 
 const persistConfig = {

@@ -65,10 +65,7 @@ export const DataPlansForm = (props) => {
           type="text"
           className="form-control"
         >
-          <option value="1">1Gb</option>
-          <option value="2">2Gb</option>
-          <option value="4">4Gb</option>
-          <option value="8">8Gb</option>
+          <option value="5">5Gb</option>
           <option value="10">10Gb</option>
           <option value="20">20Gb</option>
         </select>
@@ -89,8 +86,7 @@ export const DataPlansForm = (props) => {
           className="form-control"
         >
           <option value="1">1 Day</option>
-          <option value="3">3 Days</option>
-          <option value="7">1 Week</option>
+
         </select>
       </div>
       </div>

@@ -11,14 +11,6 @@ import {
     unPauseDeviceWithOffer,
 } from "../../services/InternalApiService";
 
-// const order = {
-
-//     productId: "57348757345",
-//     firstName: "Front",
-//     lastName: "End 2",
-//     email: "fromfrontend",
-//     // device,
-// };
 
 export const Success = (props) => {
     const [deviceStatus, setDeviceStatus] = useState('inactive');
@@ -27,92 +19,103 @@ export const Success = (props) => {
 
      // in state.deviceDetails, deviceDetails came from store.js when we created combinedReducer. 
      const { loading, devices } = useSelector(state => state.devices)
-     console.log(devices)
+     const { order } = useSelector(state => state.order)
+     console.log('Device', devices)
+     console.log('Order', order)
+    //  console.log('PriceId', order.paymentInfo.priceId)
 
 
     // get device status using iccid
     useEffect(() => {
         // console.log("in use effect");
-        // console.log(device)
+        // console.log(devices[0].iccid)
+        // console.log(order.paymentInfo.priceId)
 
-        // async function fetchData() {
-
-        // move the fetch device status to the device details page and save the status in the redux store,
-        // then check status here and call appropriate api pause/unpause or just unpause
-
-        //     try {
-
-        //         const orderResponse = await fetch("http://localhost:8000/api/orders", {
-        //             method: "post",
-        //             headers: {
-        //                 "Content-Type": "application/json",
-        //             },
-        //             body: JSON.stringify(order),
-        //         }).then((res) => res.json());
-
-        //         // const deviceStatusRes = await fetch('http://localhost:8000/api/orders').then(res => res.json());
-        //         const deviceStatusRes = await getDeviceStatusByIccid();
-
-        //         console.log(deviceStatusRes)
-
-
-
-        //         // check if device is active and pause it, then wait and upause it with an offer customer bought
-        //         if (deviceStatusRes.message.webStatus === 'active') {
-        //             console.log('in if')
-        //             const devicePauseInfo = await pauseDevice();
-        //             console.log(devicePauseInfo)
-
-        //             await timeout(30000);
-
-        //             const deviceStatusResAfterPausing = await getDeviceStatusByIccid();
-        //             console.log(deviceStatusResAfterPausing)
-
-                    
-                    
-        //             if (deviceStatusResAfterPausing.message.webStatus === 'suspended') {
-        //                 try{
-        //                 const deviceUnpauseInfo = await unPauseDeviceWithOffer();
-                    
-        //                 console.log(deviceUnpauseInfo)
-        //                 if (deviceUnpauseInfo.success === true) {
-        //                     await timeout(60000);
-        //                     const res2 = await getDeviceStatusByIccid();
-        //                     console.log(res2)
-        //                     if(res2.message.webStatus === 'active')
-        //                     setDeviceStatus(res2.message.webStatus)
-        //                 }else{
-        //                     setError('Something went wrong')
-    
-        //                 }
-
-        //             }catch(error){
-        //                 console.log(error)
-        //             }
-
-        //             }
-
-        //         }
-        //         if (deviceStatusRes.message.webStatus === 'suspended') {
-        //             console.log('in else')
-        //             console.log('about to call unpause')
-        //             const deviceUnpauseInfo = await unPauseDeviceWithOffer();
-                    
-        //             console.log(deviceUnpauseInfo)
-        //             if (deviceUnpauseInfo.success === true) {
-        //                 setDeviceStatus('active')
-        //             }else{
-        //                 setError('Something went wrong')
-
-        //             }
-        //         }
-
-        //     } catch (error) {
-        //         console.log(error)
-        //     }
-
+        // const data = {
+        //     "priceId": order.paymentInfo.priceId,
+        //     "iccid": devices[0].iccid,
         // }
-        // fetchData()
+        // unPauseDeviceWithOffer(data).then(res => console.log(res));
+
+    //     async function fetchData() {
+
+    //     // move the fetch device status to the device details page and save the status in the redux store,
+    //     // then check status here and call appropriate api pause/unpause or just unpause
+    //         // make sure device is paused before unpausing it
+    //         try {
+
+    //             // const deviceStatusRes = await fetch('http://localhost:8000/api/orders').then(res => res.json());
+    //             const deviceStatusRes = await getDeviceStatusByIccid(devices[0].iccid);
+
+    //             console.log(deviceStatusRes)
+
+
+
+    //             // check if device is active and pause it, then wait and upause it with an offer customer bought
+    //             if (deviceStatusRes.message.webStatus === 'active') {
+    //                 console.log('Device is active, about to call pause')
+    //                 const devicePauseInfo = await pauseDevice(devices[0].iccid);
+    //                 console.log('Device status after calling pause', devicePauseInfo)
+
+    //                 await timeout(30000);
+
+    //                 const deviceStatusResAfterPausing = await getDeviceStatusByIccid(devices[0].iccid);
+    //                 console.log('Confirm device status by calling device status by iccid', 
+    //                             deviceStatusResAfterPausing)
+
+    //                 console.log('data priceId', order.paymentInfo.priceId)
+    //                 const data = {
+    //                     "priceId": order.paymentInfo.priceId,
+    //                     "iccid": devices[0].iccid,
+    //                 }
+    //                 // console.log('data priceId', data.priceId)
+    //                 if (deviceStatusResAfterPausing.message.webStatus === 'suspended') {
+    //                     try{
+    //                     const deviceUnpauseInfo = await unPauseDeviceWithOffer(data);
+                    
+    //                     console.log(deviceUnpauseInfo)
+    //                     if (deviceUnpauseInfo.success === true) {
+    //                         await timeout(60000);
+    //                         const res2 = await getDeviceStatusByIccid();
+    //                         console.log(res2)
+    //                         if(res2.message.webStatus === 'active')
+    //                         setDeviceStatus(res2.message.webStatus)
+    //                     }else{
+    //                         setError('Something went wrong')
+    
+    //                     }
+
+    //                 }catch(error){
+    //                     console.log(error)
+    //                 }
+
+    //                 }
+
+    //             }
+    //             else if (deviceStatusRes.message.webStatus === 'suspended') {
+    //                 console.log('in else')
+    //                 console.log('about to call unpause')
+    //                 const data = {
+    //                     "priceId": order.paymentInfo.priceId,
+    //                     "iccid": devices[0].iccid,
+    //                 }
+    //                 const deviceUnpauseInfo = await unPauseDeviceWithOffer(data);
+                    
+    //                 console.log(deviceUnpauseInfo)
+    //                 if (deviceUnpauseInfo.success === true) {
+    //                     setDeviceStatus('active')
+    //                 }else{
+    //                     setError('Something went wrong')
+
+    //                 }
+    //             }
+
+    //         } catch (error) {
+    //             console.log(error)
+    //         }
+
+    //     }
+    //     fetchData()
     }, []);
 
     function timeout(delay) {

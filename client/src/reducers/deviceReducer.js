@@ -22,7 +22,8 @@ export const deviceReducer = (state = { devices: [] }, action) => {
                 devices: action.payload,
                 device: action.payload[0],
                 deviceId: action.payload[0]._id,
-                deviceNumber: action.payload[0].deviceNumber
+                deviceNumber: action.payload[0].deviceNumber,
+                deviceIccid: action.payload[0].iccid
             }
 
         case FIND_DEVICE_FAIL:

@@ -44,21 +44,20 @@ export const createOrder = async (data, config) => {
   return res.data;
 }
 
-// will need ICCid 
-export const getDeviceStatusByIccid = async () => {
-  const res = await http.get('/orders');
+export const getDeviceStatusByIccid = async (iccid) => {
+  const res = await http.get(`/orders/details/${iccid}`);
   return res.data;
 
 };
 
-export const pauseDevice = async () => {
-  const res = await http.post('/orders/pause');
+export const pauseDevice = async (iccid) => {
+  const res = await http.post(`/orders/pause/${iccid}`);
   return res.data;
 
 };
-
+// MAIN METHOD unpause device with offer with timer
 export const unPauseDeviceWithOffer = async (data) => {
-  const res = await http.post('/orders/unpause', data);
+  const res = await http.post('/orders/upausejob/schedule', data);
   return res.data;
 
 };

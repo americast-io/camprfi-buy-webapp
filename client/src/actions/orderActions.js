@@ -20,6 +20,7 @@ export const createOrderAction = (order) => async (dispatch, getState) => {
         }
 
         const data =  await createOrder(order, config)
+        console.log('Data returned from order action', data)
 
 
         dispatch({

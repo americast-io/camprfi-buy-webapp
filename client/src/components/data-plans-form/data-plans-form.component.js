@@ -7,7 +7,7 @@ import {
 
 // Component used on the 2nd page. Its a plans form and buy button.
 export const DataPlansForm = (props) => {
-  let [amountOfData, setAmountOfData] = useState("1");
+  let [amountOfData, setAmountOfData] = useState("5");
   let [planDuration, setPlanDuration] = useState("1");
   const [priceId, setPriceId] = useState(null);
   const [price, setPrice] = useState("");
@@ -21,7 +21,8 @@ export const DataPlansForm = (props) => {
     getAllPrices()
       .then((data) => {
         setPrices(data.data);
-        const filteredPrices = data.data.filter((price) => price.nickname && price.nickname.includes(`${amountOfData}Gb / Day for ${planDuration} Days`)
+        // const filteredPrices = data.data.filter((price) => price.nickname && price.nickname.includes(`${amountOfData}Gb / Day for ${planDuration} Days`)
+        const filteredPrices = data.data.filter((price) => price.nickname && price.nickname.includes(`${amountOfData}Gb for ${planDuration} Day`)
           
       );
         setNickname(filteredPrices[0].nickname);
@@ -36,7 +37,7 @@ export const DataPlansForm = (props) => {
 
   const handleDataPlansSubmit = (event) => {
     const filteredPrices = prices.filter((price) =>
-    price.nickname && price.nickname.includes(`${amountOfData}Gb / Day for ${planDuration} Days`)
+    price.nickname && price.nickname.includes(`${amountOfData}Gb for ${planDuration} Day`)
     );
     setNickname(filteredPrices[0].nickname);
     setFilteredPrice(filteredPrice);

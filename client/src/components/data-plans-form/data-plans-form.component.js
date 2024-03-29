@@ -7,7 +7,7 @@ import {
 
 // Component used on the 2nd page. Its a plans form and buy button.
 export const DataPlansForm = (props) => {
-  let [amountOfData, setAmountOfData] = useState("5");
+  let [amountOfData, setAmountOfData] = useState("1");
   let [planDuration, setPlanDuration] = useState("1");
   const [priceId, setPriceId] = useState(null);
   const [price, setPrice] = useState("");
